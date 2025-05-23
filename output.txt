@@ -7,3 +7,6 @@ def count_countries_in_Africa(custom_data_frame):
     result = sum([item['Country'] for item in custom_data_frame if item['Continent'] == 'Africa'])
     return result
 here we can see that the required code for execution is generated from the model and this is done without pandas.      
+
+
+Sorry for the delay in uploading this file.
