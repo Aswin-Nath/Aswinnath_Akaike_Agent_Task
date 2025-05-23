@@ -18,7 +18,7 @@ with open(path,encoding="utf8") as csv_file:
             continue
         datas.append(i)    
 take_col=columns[0]
-# Here we are the unwanted character that are pre
+# Here we are clearint the unwanted character that are present in the start
 for i in take_col:
     i=list(i)
     while i and not i[0].isalnum():
@@ -27,7 +27,7 @@ for i in take_col:
     columns.append(i)   
 
 columns.pop(0)
-
+# forming our custom data set using loops and hashmaps
 custom_data_frame=[]
 for row in range(len(datas)):
     current={}
@@ -35,8 +35,9 @@ for row in range(len(datas)):
         current[columns[col]]=datas[row][col]
     custom_data_frame.append(current)
 
+# my localLLm mistral which is loaded using OLLama
 model = OllamaLLM(model="mistral:latest")
-
+# im passing the first row of the grid for reference to the prompt
 example=custom_data_frame[0]
 
 query="count the total no of countries in Africa"
@@ -52,12 +53,20 @@ exec(response, brackets, local_vars)
 res=local_vars["result"]
 '''
 
+# we are invoking the model for response
 response = model.invoke(prompt)
+
+# we are taking the particular code part using regex
 code_match = re.search(r"```(?:python)?\n(.*?)```", response, re.DOTALL)
-# print(code_match)
+
+# the code that we are going to run
 code_to_run = code_match.group(1)
 print(code_to_run)
+
+# the data that we are going to pass to the code
 local_vars = {"custom_data_frame": custom_data_frame}
+
+# running the code using exec()
 exec(code_to_run, {}, local_vars)
 
 # y=mx+c
