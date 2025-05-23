@@ -1,0 +1,9 @@
+input: 
+query="count the total no of countries in Africa"
+
+output:
+aike_agent_task> c: && cd c:\Users\aswin\Projects\akaike_agent_task && cmd /C "c:\Users\aswin\Projects\RAG\myenv\python.exe c:\Users\aswin\.vscode\extensions\ms-python.debugpy-2025.8.0-win32-x64\bundled\libs\debugpy\launcher 62727 -- c:\Users\aswin\Projects\akaike_agent_task\read.py "     
+def count_countries_in_Africa(custom_data_frame):
+    result = sum([item['Country'] for item in custom_data_frame if item['Continent'] == 'Africa'])
+    return result
+here we can see that the required code for execution is generated from the model and this is done without pandas.      
